@@ -1,0 +1,22 @@
+{
+  "name": "Play with MPV",
+  "version": "0.0.1",
+  "manifest_version": 2,
+  "description": "Sends videos in pages like youtube to an external MPV player",
+  "homepage_url": "https://github.com/thann/play-with-mpv",
+  "icons": {
+    "128": "mpv-logo.png"
+  },
+  "page_action": {
+    "default_icon": "mpv-logo.png",
+    "default_title": "Play with MPV"
+  },
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+  },
+  "permissions": [
+    "activeTab",
+    "http://localhost/"
+  ]
+}
