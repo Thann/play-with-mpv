@@ -14,14 +14,21 @@ function HandleContex(info, tab){
 
 //Adding context menu item
 chrome.runtime.onInstalled.addListener(function() {
-var contexts = ["link"]
-chrome.contextMenus.create({"title": "Play In MPV", "id":"plaympvlink", "contexts":contexts});
+  var contexts = ["link"]
+  chrome.contextMenus.create({
+    "title": "Play In MPV",
+    "id":"plaympvlink",
+    "contexts":contexts
+  });
 });
 // adding listener for contex Click
 chrome.contextMenus.onClicked.addListener(HandleContex);
 
 // Send current tabs url to MPV server
-chrome.pageAction.onClicked.addListener(HandleContex);
+chrome.pageAction.onClicked.addListener(function(tab){
+    // console.info("Clicked!", tab.url)
+    sendurl(tab.url);
+});
 
 function sendurl(url){
   var xhr = new XMLHttpRequest();
