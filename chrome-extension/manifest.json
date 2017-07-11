@@ -17,6 +17,7 @@
   },
   "permissions": [
     "activeTab",
-    "http://localhost/"
+    "http://localhost/",
+    "contextMenus" 
   ]
 }
