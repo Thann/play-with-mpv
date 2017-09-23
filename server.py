@@ -39,10 +39,16 @@ class Handler(BaseHTTPServer.BaseHTTPRequestHandler, CompatibilityMixin):
             self.respond(400)
 
 
-httpd = BaseHTTPServer.HTTPServer(("", PORT), Handler)
-print("serving at port {}".format(PORT))
-try:
-    httpd.serve_forever()
-except KeyboardInterrupt:
-    print(" shutting down...")
-    httpd.shutdown()
+def start():
+    httpd = BaseHTTPServer.HTTPServer(("", PORT), Handler)
+    print("serving at port {}".format(PORT))
+    try:
+        httpd.serve_forever()
+    except KeyboardInterrupt:
+        print(" shutting down...")
+        httpd.shutdown()
+
+
+if __name__ == '__main__':
+    start()
+
