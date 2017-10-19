@@ -12,3 +12,20 @@ Chrome extension and python server that allows you to play videos in webpages wi
 Navigate to a youtube video, then click the extension (or right-click a link). MPV should popup and start playing the video.
 
 ![screenshot](https://github.com/thann/play-with-mpv/raw/master/screenshot.png)
+
+## Protips
+Configure MPV to have no border, stay on top, and start in the corner: edit `~/.config/mpv/mpv.conf`
+```
+ontop=yes
+border=no
+window-scale=0.4
+geometry=100%:100%
+```
+
+Inorder to resize the window without borders: edit `~/.config/mpv/input.conf`
+```
+` cycle border
+ALT+UP add window-scale 0.05
+ALT+DOWN add window-scale -0.05
+```
+
