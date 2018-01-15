@@ -8,6 +8,8 @@ Chrome extension and python server that allows you to play videos in webpages wi
 4. Run `pip install git+git://github.com/thann/play-with-mpv --user`
 5. Start server by running `play-with-mpv` (or use the Linux _free desktop_ shortcut)
 
+(optional) Install [peerflix](https://github.com/mafintosh/peerflix) to stream torrents
+
 ## Usage
 Navigate to a youtube video, then click the extension (or right-click a link). MPV should popup and start playing the video.
 

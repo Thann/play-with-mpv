@@ -6,7 +6,7 @@ def read(fname):
 
 setup(
     name = "play-with-mpv",
-    version = "0.0.3",
+    version = "0.0.4",
     author = "Jonathan Knapp",
     author_email = "jaknapp8@gmail.com",
     description = "Chrome extension and python server that allows you to play videos in webpages with MPV instead.",
