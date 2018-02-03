@@ -34,9 +34,9 @@ class Handler(BaseHTTPServer.BaseHTTPRequestHandler, CompatibilityMixin):
         if url[0] == "play_url":
             url = url[1]
             if url.startswith('magnet:') or url.endswith('.torrent'):
-                pipe = Popen(['peerflix', '-k',  url])
+                pipe = Popen(['peerflix', '-k',  url, '--', '--force-window'])
             else:
-                pipe = Popen(['mpv', url])
+                pipe = Popen(['mpv', url, '--force-window'])
             self.respond(200, "playing...")
         else:
             self.respond(400)
