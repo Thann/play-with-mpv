@@ -11,12 +11,18 @@ and even torrents if you install [peerflix](https://github.com/mafintosh/peerfli
 5. Start server by running `play-with-mpv` (or use the Linux _free desktop_ shortcut)
 
 (optional) Install [peerflix](https://github.com/mafintosh/peerflix) to stream torrents.  
-(recommended) Install youtube-dl through your package manager for frequent updates.
+(recommended) Install youtube-dl through your package manager for frequent updates.  
+(Arch Linux) [aur package](https://aur.archlinux.org/packages/play-with-mpv-git) available.
 
 ## Usage
 Navigate to a youtube video, then click the extension (or right-click a link). MPV should popup and start playing the video.
 
 ![screenshot](https://github.com/thann/play-with-mpv/raw/master/screenshot.png)
+
+## Autostart
+- Linux: `cp {/usr,~/.local}/share/applications/Play\ With\ MPV\ \(server\).desktop ~/.config/autostart`
+- MacOS: [instructions](https://stackoverflow.com/questions/29338066/mac-osx-execute-a-python-script-at-startup)
+- Windows [instructions](https://stackoverflow.com/questions/4438020/how-to-start-a-python-file-while-windows-starts)
 
 ## Protips
 MPV is [highly configurable](https://mpv.io/manual/stable/), this is just how I like to use it.
