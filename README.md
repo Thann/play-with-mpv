@@ -20,7 +20,7 @@ Navigate to a youtube video, then click the extension (or right-click a link). M
 ![screenshot](https://github.com/thann/play-with-mpv/raw/master/screenshot.png)
 
 ## Autostart
-- Linux: `cp {/usr,~/.local}/share/applications/Play\ With\ MPV\ \(server\).desktop ~/.config/autostart`
+- Linux: `cp {/usr,~/.local}/share/applications/thann.play-with-mpv.desktop ~/.config/autostart`
 - MacOS: [instructions](https://stackoverflow.com/questions/29338066/mac-osx-execute-a-python-script-at-startup)
 - Windows [instructions](https://stackoverflow.com/questions/4438020/how-to-start-a-python-file-while-windows-starts)
 

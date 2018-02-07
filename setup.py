@@ -6,7 +6,7 @@ def read(fname):
 
 setup(
     name = "play-with-mpv",
-    version = "0.0.5",
+    version = "0.0.6",
     author = "Jonathan Knapp",
     author_email = "jaknapp8@gmail.com",
     description = "Chrome extension and python server that allows you to play videos in webpages with MPV instead.",
@@ -23,16 +23,18 @@ setup(
     py_modules=["server"],
     install_requires=['youtube-dl'],
     entry_points={
-        # 'console_scripts': [
         'gui_scripts': [
             'play-with-mpv=server:start',
         ],
     },
-    setup_requires=['install_freedesktop'],
+    setup_requires=['install_freedesktop>=0.2.0'],
+    dependency_links=[
+        "git+ssh://git@github.com/thann/install_freedesktop.git@master#egg=install_freedesktop-0.2.0"
+    ],
     desktop_entries={
         'play-with-mpv': {
+            'filename': 'thann.play-with-mpv',
             'Name': 'Play With MPV (server)',
-            # 'GenericName': 'play-with-mpv',
             'Categories': 'AudioVideo;Audio;Video;Player;TV',
             'Icon': 'mpv',
         },
