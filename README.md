@@ -15,7 +15,8 @@ and even torrents if you install [peerflix](https://github.com/mafintosh/peerfli
 (Arch Linux) [aur package](https://aur.archlinux.org/packages/play-with-mpv-git) available.
 
 ## Usage
-Navigate to a youtube video, then click the extension (or right-click a link). MPV should popup and start playing the video.
+Right-click this [link](https://www.youtube.com/watch?v=dQw4w9WgXcQ) and select "Play with MPV".
+MPV should popup and start playing the video.
 
 ![screenshot](https://github.com/thann/play-with-mpv/raw/master/screenshot.png)
 
