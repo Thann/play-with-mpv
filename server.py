@@ -1,4 +1,4 @@
-#!/bin/env python
+#!/usr/bin/env python
 import sys
 from subprocess import Popen
 
@@ -38,6 +38,15 @@ class Handler(BaseHTTPServer.BaseHTTPRequestHandler, CompatibilityMixin):
             else:
                 pipe = Popen(['mpv', url, '--force-window'])
             self.respond(200, "playing...")
+        elif url[0] == "cast_url":
+            url = url[1]
+            if url.startswith('magnet:') or url.endswith('.torrent'):
+                #pipe = Popen(['peerflix', '-k',  url, '--', '--force-window'])
+                raise Exception('Casting torrents not yet supported!')
+            else:
+                pipe = Popen(['mkchromecast', '-y', url])
+            self.respond(200, "casting...")
+
         else:
             self.respond(400)
 

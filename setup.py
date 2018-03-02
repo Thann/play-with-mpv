@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 import os
 from setuptools import setup, find_packages
 
@@ -8,7 +9,7 @@ def read(fname):
 
 setup(
     name = "play-with-mpv",
-    version = "0.0.6",
+    version = "0.0.7",
     author = "Jonathan Knapp",
     author_email = "jaknapp8@gmail.com",
     description = description,

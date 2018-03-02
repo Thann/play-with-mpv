@@ -11,11 +11,13 @@ and even torrents if you install [peerflix](https://github.com/mafintosh/peerfli
 5. Start server by running `play-with-mpv` (or use the Linux _free desktop_ shortcut)
 
 (optional) Install [peerflix](https://github.com/mafintosh/peerflix) to stream torrents.  
+(optional) Install [mkchromecast](http://mkchromecast.com/) `pip install git+git://github.com/muammar/mkchromecast --user`
+and [extension](https://chrome.google.com/webstore/detail/edeepcccaejnnodlpmcoackkdgaijakg).  
 (recommended) Install youtube-dl through your package manager for frequent updates.  
 (Arch Linux) [aur package](https://aur.archlinux.org/packages/play-with-mpv-git) available.
 
 ## Usage
-Right-click this [link](https://www.youtube.com/watch?v=dQw4w9WgXcQ) and select "Play with MPV".
+Right-click [this link](https://www.youtube.com/watch?v=dQw4w9WgXcQ) and select "Play with MPV".
 MPV should popup and start playing the video.
 
 ![screenshot](https://github.com/thann/play-with-mpv/raw/master/screenshot.png)

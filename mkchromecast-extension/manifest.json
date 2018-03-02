@@ -1,0 +1,23 @@
+{
+  "name": "Cast with MkChromecast",
+  "version": "0.0.1",
+  "manifest_version": 2,
+  "description": "Casts videos in pages like youtube via MkChromecast",
+  "homepage_url": "https://github.com/thann/play-with-mpv",
+  "icons": {
+    "128": "mkchromecast-logo.png"
+  },
+  "page_action": {
+    "default_icon": "mkchromecast-logo.png",
+    "default_title": "Cast with MkChromecast"
+  },
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+  },
+  "permissions": [
+    "activeTab",
+    "contextMenus",
+    "http://localhost/"
+  ]
+}
