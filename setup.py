@@ -9,7 +9,7 @@ def read(fname):
 
 setup(
     name = "play-with-mpv",
-    version = "0.0.7",
+    version = "0.0.8",
     author = "Jonathan Knapp",
     author_email = "jaknapp8@gmail.com",
     description = description,

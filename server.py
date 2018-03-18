@@ -41,10 +41,13 @@ class Handler(BaseHTTPServer.BaseHTTPRequestHandler, CompatibilityMixin):
         elif url[0] == "cast_url":
             url = url[1]
             if url.startswith('magnet:') or url.endswith('.torrent'):
-                #pipe = Popen(['peerflix', '-k',  url, '--', '--force-window'])
-                raise Exception('Casting torrents not yet supported!')
+                print(" === WARNING: Casting torrents not yet fully supported!")
+                with Popen(['mkchromecast', '--video',
+                            '--source-url', 'http://localhost:8888']):
+                    pass
+                pipe.terminate()
             else:
-                pipe = Popen(['mkchromecast', '-y', url])
+                pipe = Popen(['mkchromecast', '--video', '-y', url])
             self.respond(200, "casting...")
 
         else:
