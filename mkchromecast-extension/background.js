@@ -8,6 +8,7 @@ chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
 chrome.pageAction.onClicked.addListener(function(tab){
 	// console.info("Clicked!", tab.url)
 	playUrl(tab.url);
+	document.getElementsByTagName('video')[0].pause();
 });
 
 function playUrl(url) {
