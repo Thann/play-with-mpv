@@ -1,6 +1,6 @@
 {
   "name": "Play with MPV",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "manifest_version": 2,
   "description": "Sends videos in pages like youtube to an external MPV player",
   "homepage_url": "https://github.com/thann/play-with-mpv",
@@ -19,5 +19,13 @@
     "activeTab",
     "contextMenus",
     "http://localhost/"
-  ]
+  ],
+  "commands": {
+    "launch": {
+      "suggested_key": {
+        "default": "Ctrl+Space"
+      },
+      "description": "Play with MPV"
+    }
+  }
 }

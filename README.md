@@ -18,7 +18,7 @@ and [extension](https://chrome.google.com/webstore/detail/edeepcccaejnnodlpmcoac
 
 ## Usage
 Right-click [this link](https://www.youtube.com/watch?v=dQw4w9WgXcQ) and select "Play with MPV".
-MPV should popup and start playing the video.
+MPV should popup and start playing the video. (Ctrl+Space also works)
 
 ![screenshot](https://github.com/thann/play-with-mpv/raw/master/screenshot.png)
 
