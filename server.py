@@ -8,6 +8,7 @@ else:  # python 3
     import http.server as BaseHTTPServer
 
 PORT = 7531
+ARGS = sys.argv[1:]
 
 if sys.version_info[0] < 3:
     class CompatibilityMixin:
@@ -34,9 +35,9 @@ class Handler(BaseHTTPServer.BaseHTTPRequestHandler, CompatibilityMixin):
         if url[0] == "play_url":
             url = url[1]
             if url.startswith('magnet:') or url.endswith('.torrent'):
-                pipe = Popen(['peerflix', '-k',  url, '--', '--force-window'])
+                pipe = Popen(['peerflix', '-k',  url, '--'] + ARGS)
             else:
-                pipe = Popen(['mpv', url, '--force-window'])
+                pipe = Popen(['mpv', url] + ARGS)
             self.respond(200, "playing...")
         elif url[0] == "cast_url":
             url = url[1]
@@ -57,6 +58,7 @@ class Handler(BaseHTTPServer.BaseHTTPRequestHandler, CompatibilityMixin):
 def start():
     httpd = BaseHTTPServer.HTTPServer(("", PORT), Handler)
     print("serving at port {}".format(PORT))
+    print("with args {}".format(ARGS))
     try:
         httpd.serve_forever()
     except KeyboardInterrupt:
@@ -66,4 +68,3 @@ def start():
 
 if __name__ == '__main__':
     start()
-
