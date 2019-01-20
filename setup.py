@@ -23,11 +23,11 @@ setup(
         "License :: OSI Approved :: MIT License",
     ],
 
-    py_modules=["server"],
+    py_modules=["play_with_mpv"],
     install_requires=['youtube-dl'],
     entry_points={
         'gui_scripts': [
-            'play-with-mpv=server:start',
+            'play-with-mpv=play_with_mpv:start',
         ],
     },
     setup_requires=['install_freedesktop>=0.2.0'],
