@@ -7,9 +7,26 @@ description = "Chrome extension and python server that allows you to play videos
 def read(fname):
     return open(os.path.join(os.path.dirname(__file__), fname)).read()
 
+def get_version():
+    from subprocess import Popen, PIPE
+    try:
+        from subprocess import DEVNULL # py3
+    except ImportError:
+        import os
+        DEVNULL = open(os.devnull, 'wb')
+
+    def run(*cmd):
+        return (Popen(cmd, stderr=DEVNULL, stdout=PIPE)
+                .communicate()[0].decode('utf8').strip())
+
+    return(run('git', 'describe', '--tags').replace('-','.post',1).replace('-','+',1)
+        or '0.0.0.post{}+g{}'.format(
+            run('git', 'rev-list', '--count', 'HEAD'),
+            run('git', 'rev-parse', '--short', 'HEAD')))
+
 setup(
     name = "play-with-mpv",
-    version = "0.0.8",
+    version = get_version(),
     author = "Jonathan Knapp",
     author_email = "jaknapp8@gmail.com",
     description = description,
