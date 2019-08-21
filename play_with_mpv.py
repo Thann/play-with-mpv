@@ -7,7 +7,6 @@ PORT = 7531
 
 if sys.version_info[0] < 3:  # python 2
     import BaseHTTPServer
-    # from urlparse import urlparse
     import urlparse
     class CompatibilityMixin:
         def send_body(self, msg):
