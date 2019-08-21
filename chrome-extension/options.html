@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Play-With-MPV Options</title>
+</head>
+<body>
+    <!-- <div>
+        <b>Server Status:</b>
+        <span id="server_status">checking...</span>
+    </div> -->
+
+    <h4>Maximum Resolution:</h4>
+    <select id="maxheight">
+        <option value="">Maximum</option>
+        <option value="2160">4k</option>
+        <option value="1440">1440p</option>
+        <option value="1080">1080p</option>
+        <option value="720">720p</option>
+        <option value="480">480p</option>
+    </select>
+
+    <h4>Server location:</h4>
+    <input id="server_url" placeholder="http://localhost:7531">
+
+    <h4>MPV Arguments:</h4>
+    <textarea id="mpv_args" placeholder="--force-window"></textarea>
+    <div>(one per line)</div>
+
+    <br> <br>
+    <button id="save">Save</button>
+    <span id="status"></span>
+
+    <style>
+        h4 { margin-bottom: 0; }
+    </style>
+    <script src="options.js"></script>
+</body>
+</html>

@@ -1,20 +1,22 @@
 #!/usr/bin/env python
+# Plays MPV when instructed to by a chrome extension =]
+
 import sys
 from subprocess import Popen
+PORT = 7531
 
 if sys.version_info[0] < 3:  # python 2
     import BaseHTTPServer
-else:  # python 3
-    import http.server as BaseHTTPServer
-
-PORT = 7531
-
-if sys.version_info[0] < 3:
+    # from urlparse import urlparse
+    import urlparse
     class CompatibilityMixin:
         def send_body(self, msg):
             self.wfile.write(msg+'\n')
             self.wfile.close()
-else:
+
+else:  # python 3
+    import http.server as BaseHTTPServer
+    import urllib.parse as urlparse
     class CompatibilityMixin:
         def send_body(self, msg):
             self.wfile.write(bytes(msg+'\n', 'utf-8'))
@@ -29,17 +31,24 @@ class Handler(BaseHTTPServer.BaseHTTPRequestHandler, CompatibilityMixin):
             self.send_body(body)
 
     def do_GET(self):
-        url = self.path.split("?",1)[1].split("=",1)
-        print(url)
-        if url[0] == "play_url":
-            url = url[1]
+        try:
+            url = urlparse.urlparse(self.path)
+            query = urlparse.parse_qs(url.query)
+        except:
+            query = {}
+        if query.get('mpv_args'):
+            print("MPV ARGS:", query.get('mpv_args'))
+        if "play_url" in query:
+            url = query["play_url"][0]
             if url.startswith('magnet:') or url.endswith('.torrent'):
-                pipe = Popen(['peerflix', '-k',  url, '--', '--force-window'])
+                pipe = Popen(['peerflix', '-k',  url, '--', '--force-window'] +
+                             query.get("mpv_args", []))
             else:
-                pipe = Popen(['mpv', url, '--force-window'])
+                pipe = Popen(['mpv', url, '--force-window'] +
+                             query.get("mpv_args", []))
             self.respond(200, "playing...")
-        elif url[0] == "cast_url":
-            url = url[1]
+        elif "cast_url" in query:
+            url = query["cast_url"][0]
             if url.startswith('magnet:') or url.endswith('.torrent'):
                 print(" === WARNING: Casting torrents not yet fully supported!")
                 with Popen(['mkchromecast', '--video',
