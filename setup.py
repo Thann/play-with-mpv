@@ -41,13 +41,13 @@ setup(
     ],
 
     py_modules=["play_with_mpv"],
-    install_requires=['youtube-dl'],
+    install_requires=['wheel', 'youtube-dl'],
     entry_points={
         'gui_scripts': [
             'play-with-mpv=play_with_mpv:start',
         ],
     },
-    setup_requires=['install_freedesktop>=0.2.0'],
+    setup_requires=['wheel', 'install_freedesktop>=0.2.0'],
     dependency_links=[
         "https://github.com/thann/install_freedesktop/tarball/master#egg=install_freedesktop-0.2.0"
     ],
