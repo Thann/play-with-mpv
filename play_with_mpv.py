@@ -4,6 +4,10 @@
 import sys
 from subprocess import Popen
 PORT = 7531
+# Use --public if you want the server and extension on different computers
+hostname = 'localhost'
+if '--public' in sys.argv:
+    hostname = '0.0.0.0'
 
 if sys.version_info[0] < 3:  # python 2
     import BaseHTTPServer
@@ -63,8 +67,8 @@ class Handler(BaseHTTPServer.BaseHTTPRequestHandler, CompatibilityMixin):
 
 
 def start():
-    httpd = BaseHTTPServer.HTTPServer(("", PORT), Handler)
-    print("serving at port {}".format(PORT))
+    httpd = BaseHTTPServer.HTTPServer((hostname, PORT), Handler)
+    print("serving on {}:{}".format(hostname, PORT))
     try:
         httpd.serve_forever()
     except KeyboardInterrupt:
