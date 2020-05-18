@@ -27,7 +27,7 @@ function playUrl(url, pause) {
 			opts.mpv_args.splice(0, 0,
 			`--ytdl-format=bestvideo[height<=?${opts.maxheight}]+bestaudio/best`);
 		}
-		const query = (`?play_url=${url}` + [''].concat(
+		const query = (`?play_url=` + encodeURIComponent(url) + [''].concat(
 			opts.mpv_args.map(encodeURIComponent)).join('&mpv_args='));
 
 		const xhr = new XMLHttpRequest();
