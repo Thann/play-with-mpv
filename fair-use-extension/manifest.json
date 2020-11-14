@@ -1,0 +1,36 @@
+{
+  "name": "Fair Use Download",
+  "version": "0.1.0",
+  "manifest_version": 2,
+  "description": "Download videos in pages like youtube for Fair Use purposes.",
+  "homepage_url": "https://github.com/thann/play-with-mpv",
+  "icons": {
+    "128": "fair-use.png"
+  },
+  "page_action": {
+    "default_icon": "fair-use.png",
+    "default_title": "Fair Use Download"
+  },
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+  },
+  "permissions": [
+    "storage",
+    "activeTab",
+    "contextMenus",
+    "http://localhost/"
+  ],
+  "commands": {
+    "launch": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+Space"
+      },
+      "description": "Fair Use"
+    }
+  },
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": false
+  }
+}

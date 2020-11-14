@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Fair Use Options</title>
+</head>
+<body>
+    <!-- <div>
+        <b>Server Status:</b>
+        <span id="server_status">checking...</span>
+    </div> -->
+
+    <h4>Server location:</h4>
+    <input id="server_url" placeholder="http://localhost:7531">
+
+    <h4>Download location:</h4>
+    <input id="location" placeholder="Downloads">
+
+    <h4>Youtube-DL Arguments:</h4>
+    <textarea id="ytdl_args" placeholder="--add-metadata"></textarea>
+    <div>
+        (one per line)
+        &nbsp;
+        <!-- <a href="https://mpv.io/manual/stable/#options"  target="_blank">docs</a> -->
+    </div>
+
+    <br> <br>
+    <span>
+        (Icon credit to Dave Gandy
+        <sup style="font-size: 6px;">
+            <a href="https://iconify.design/icon-sets/fa-solid/cloud-download-alt.html"
+                target="_blank">&#128279</a>
+        </sup>)
+    </span>
+    <br> <br>
+    <button id="save">Save</button>
+    <span id="status"></span>
+
+    <style>
+        h4 { margin-bottom: 0; }
+    </style>
+    <script src="options.js"></script>
+</body>
+</html>

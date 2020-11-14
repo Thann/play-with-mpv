@@ -10,6 +10,7 @@ and even torrents if you install [peerflix](https://github.com/mafintosh/peerfli
 4. Run `pip install git+git://github.com/thann/play-with-mpv --user`
 5. Start server by running `play-with-mpv` (or use the Linux _free desktop_ shortcut)
 
+(optional) Install [fair-use](https://chrome.google.com/webstore/detail/fair-use-download/fhokdginneihphnneihijgbhbdoehjaj) extension.  
 (optional) Install [peerflix](https://github.com/mafintosh/peerflix) to stream torrents.  
 (optional) Install [mkchromecast](http://mkchromecast.com/) `pip install git+git://github.com/muammar/mkchromecast --user`
 and [extension](https://chrome.google.com/webstore/detail/edeepcccaejnnodlpmcoackkdgaijakg).  

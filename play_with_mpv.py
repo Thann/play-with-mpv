@@ -42,26 +42,40 @@ class Handler(BaseHTTPServer.BaseHTTPRequestHandler, CompatibilityMixin):
         if query.get('mpv_args'):
             print("MPV ARGS:", query.get('mpv_args'))
         if "play_url" in query:
-            url = query["play_url"][0]
-            if url.startswith('magnet:') or url.endswith('.torrent'):
-                pipe = Popen(['peerflix', '-k',  url, '--', '--force-window'] +
+            urls = str(query["play_url"][0])
+            if urls.startswith('magnet:') or urls.endswith('.torrent'):
+                pipe = Popen(['peerflix', '-k',  urls, '--', '--force-window'] +
                              query.get("mpv_args", []))
             else:
-                pipe = Popen(['mpv', url, '--force-window'] +
+                pipe = Popen(['mpv', urls, '--force-window'] +
                              query.get("mpv_args", []))
             self.respond(200, "playing...")
         elif "cast_url" in query:
-            url = query["cast_url"][0]
-            if url.startswith('magnet:') or url.endswith('.torrent'):
+            urls = str(query["cast_url"][0])
+            if urls.startswith('magnet:') or urls.endswith('.torrent'):
                 print(" === WARNING: Casting torrents not yet fully supported!")
                 with Popen(['mkchromecast', '--video',
                             '--source-url', 'http://localhost:8888']):
                     pass
                 pipe.terminate()
             else:
-                pipe = Popen(['mkchromecast', '--video', '-y', url])
+                pipe = Popen(['mkchromecast', '--video', '-y', urls])
             self.respond(200, "casting...")
 
+        elif "fairuse_url" in query:
+            urls = str(query["fairuse_url"][0])
+            location = query.get("location", ['~/Downloads/'])[0]
+            if "%" not in location:
+                location += "%(title)s.%(ext)s"
+            print("downloading ", urls, "to", location)
+            if urls.startswith('magnet:') or urls.endswith('.torrent'):
+                msg = " === ERROR: Downloading torrents not yet supported!"
+                print(msg)
+                self.respond(400, msg)
+            else:
+                pipe = Popen(['youtube-dl', urls, '-o', location] +
+                             query.get('ytdl_args', []))
+                self.respond(200, "downloading...")
         else:
             self.respond(400)
 
