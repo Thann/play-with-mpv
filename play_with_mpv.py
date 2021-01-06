@@ -3,6 +3,7 @@
 
 import sys
 from subprocess import Popen
+from shutil import which
 PORT = 7531
 # Use --public if you want the server and extension on different computers
 hostname = 'localhost'
@@ -42,12 +43,20 @@ class Handler(BaseHTTPServer.BaseHTTPRequestHandler, CompatibilityMixin):
         if query.get('mpv_args'):
             print("MPV ARGS:", query.get('mpv_args'))
         if "play_url" in query:
-            urls = str(query["play_url"][0])
+            urls = str(query["play_url"])
             if urls.startswith('magnet:') or urls.endswith('.torrent'):
                 pipe = Popen(['peerflix', '-k',  urls, '--', '--force-window'] +
                              query.get("mpv_args", []))
             else:
-                pipe = Popen(['mpv', urls, '--force-window'] +
+                mpv_command = 'mpv'
+                if which('celluloid') is not None:
+                    mpv_command = 'celluloid'
+                if "list" in query and which('celluloid') is not None:
+                    urls = str(query["play_url"][0] + "&list=" + query["list"][0])
+                    mpv_options='--mpv-ytdl-format="' + str(query["mpv_args"][0]) + '"'
+                    pipe = Popen([mpv_command, urls, mpv_options])
+                else:
+                    pipe = Popen([mpv_command, urls, '--force-window'] +
                              query.get("mpv_args", []))
             self.respond(200, "playing...")
         elif "cast_url" in query:
