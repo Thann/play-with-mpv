@@ -2,12 +2,8 @@
 # Plays MPV when instructed to by a chrome extension =]
 
 import sys
+import argparse
 from subprocess import Popen
-PORT = 7531
-# Use --public if you want the server and extension on different computers
-hostname = 'localhost'
-if '--public' in sys.argv:
-    hostname = '0.0.0.0'
 
 if sys.version_info[0] < 3:  # python 2
     import BaseHTTPServer
@@ -81,8 +77,13 @@ class Handler(BaseHTTPServer.BaseHTTPRequestHandler, CompatibilityMixin):
 
 
 def start():
-    httpd = BaseHTTPServer.HTTPServer((hostname, PORT), Handler)
-    print("serving on {}:{}".format(hostname, PORT))
+    parser = argparse.ArgumentParser(description='Plays MPV when instructed to by a browser extension.', formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+    parser.add_argument('--port',   type=int,  default=7531, help='The port to listen on.')
+    parser.add_argument('--public', action='store_true',     help='Accept traffic from other comuters.')
+    args = parser.parse_args()
+    hostname = '0.0.0.0' if args.public else 'localhost'
+    httpd = BaseHTTPServer.HTTPServer((hostname, args.port), Handler)
+    print("serving on {}:{}".format(hostname, args.port))
     try:
         httpd.serve_forever()
     except KeyboardInterrupt:
