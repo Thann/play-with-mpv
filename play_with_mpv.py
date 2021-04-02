@@ -40,22 +40,34 @@ class Handler(BaseHTTPServer.BaseHTTPRequestHandler, CompatibilityMixin):
         if "play_url" in query:
             urls = str(query["play_url"][0])
             if urls.startswith('magnet:') or urls.endswith('.torrent'):
-                pipe = Popen(['peerflix', '-k',  urls, '--', '--force-window'] +
-                             query.get("mpv_args", []))
+                try:
+                    pipe = Popen(['peerflix', '-k',  urls, '--', '--force-window'] +
+                                 query.get("mpv_args", []))
+                except FileNotFoundError as e:
+                    missing_bin('peerflix')
             else:
-                pipe = Popen(['mpv', urls, '--force-window'] +
-                             query.get("mpv_args", []))
+                try:
+                    pipe = Popen(['mpv', urls, '--force-window'] +
+                                 query.get("mpv_args", []))
+                except FileNotFoundError as e:
+                    missing_bin('mpv')
             self.respond(200, "playing...")
         elif "cast_url" in query:
             urls = str(query["cast_url"][0])
             if urls.startswith('magnet:') or urls.endswith('.torrent'):
                 print(" === WARNING: Casting torrents not yet fully supported!")
-                with Popen(['mkchromecast', '--video',
-                            '--source-url', 'http://localhost:8888']):
-                    pass
+                try:
+                    with Popen(['mkchromecast', '--video',
+                                '--source-url', 'http://localhost:8888']):
+                        pass
+                except FileNotFoundError as e:
+                    missing_bin('mkchromecast')
                 pipe.terminate()
             else:
-                pipe = Popen(['mkchromecast', '--video', '-y', urls])
+                try:
+                    pipe = Popen(['mkchromecast', '--video', '-y', urls])
+                except FileNotFoundError as e:
+                    missing_bin('mkchromecast')
             self.respond(200, "casting...")
 
         elif "fairuse_url" in query:
@@ -69,11 +81,20 @@ class Handler(BaseHTTPServer.BaseHTTPRequestHandler, CompatibilityMixin):
                 print(msg)
                 self.respond(400, msg)
             else:
-                pipe = Popen(['youtube-dl', urls, '-o', location] +
-                             query.get('ytdl_args', []))
+                try:
+                    pipe = Popen(['youtube-dl', urls, '-o', location] +
+                                 query.get('ytdl_args', []))
+                except FileNotFoundError as e:
+                    missing_bin('youtube-dl')
                 self.respond(200, "downloading...")
         else:
             self.respond(400)
+
+
+def missing_bin(bin):
+    print("======================")
+    print(f"ERROR: {bin.upper()} does not appear to be installed correctly! please ensure you can launch '{bin}' in the terminal.")
+    print("======================")
 
 
 def start():
