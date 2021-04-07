@@ -58,8 +58,14 @@ chrome.contextMenus.onClicked.addListener(function(info, tab) {
 	// console.log("item " + info.menuItemId + " was clicked");
 	// console.log("info: " + JSON.stringify(info));
 	// console.log("tab: " + JSON.stringify(tab));
-
-	playUrl(info["linkUrl"] || info["srcUrl"]|| info["pageUrl"], true);
+	
+	let url = info["linkUrl"] || info["srcUrl"]|| info["pageUrl"];
+	
+	if (url !== undefined && url !== null) {
+            playUrl(url.replace("blob:", ""), true);
+	} else {
+	    console.error("[play-with-mpv]: Failed to retrieve url from ifo", info);
+	}
 });
 
 chrome.commands.onCommand.addListener(function(command) {
