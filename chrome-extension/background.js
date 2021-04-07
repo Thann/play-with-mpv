@@ -25,7 +25,7 @@ function playUrl(url, pause) {
 		}
 		if (opts.maxheight) {
 			opts.mpv_args.splice(0, 0,
-			`--ytdl-format=bestvideo[height<=?${opts.maxheight}]+bestaudio/best`);
+			`--ytdl-format=best[height<=${opts.maxheight}]/bestvideo[height<=?${opts.maxheight}]+bestaudio/best`);
 		}
 		const query = (`?play_url=` + encodeURIComponent(url) + [''].concat(
 			opts.mpv_args.map(encodeURIComponent)).join('&mpv_args='));
