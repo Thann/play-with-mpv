@@ -5,6 +5,7 @@ import sys
 import argparse
 from subprocess import Popen
 
+FileNotFoundError = IOError
 if sys.version_info[0] < 3:  # python 2
     import BaseHTTPServer
     import urlparse
@@ -93,7 +94,8 @@ class Handler(BaseHTTPServer.BaseHTTPRequestHandler, CompatibilityMixin):
 
 def missing_bin(bin):
     print("======================")
-    print(f"ERROR: {bin.upper()} does not appear to be installed correctly! please ensure you can launch '{bin}' in the terminal.")
+    print("ERROR: "+bin.upper()+" does not appear to be installed correctly!")
+    print("please ensure you can launch '"+bin+"' in the terminal.")
     print("======================")
 
 
