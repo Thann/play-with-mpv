@@ -119,7 +119,7 @@ class Handler(BaseHTTPServer.BaseHTTPRequestHandler, CompatibilityMixin):
 
 def missing_bin(bin):
     print("======================")
-    print(f"ERROR: {bin.upper()} does not appear to be installed correctly! please ensure you can launch '{bin}' in the terminal.")
+    print("ERROR: %s does not appear to be installed correctly! please ensure you can launch '%s' in the terminal." % (bin.upper(), bin))
     print("======================")
 
 
