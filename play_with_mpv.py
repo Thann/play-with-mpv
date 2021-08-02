@@ -21,6 +21,7 @@ def suppress_stdout():
             yield
         finally:
             sys.stdout = old_stdout
+            sys.stderr = old_stderr
 
 @contextmanager
 def dummy_context():
