@@ -25,7 +25,7 @@ function playUrl(url, pause) {
 		}
 		if (opts.maxheight) {
 			opts.mpv_args.splice(0, 0,
-			`--ytdl-format=bestvideo[height<=?${opts.maxheight}]+bestaudio/best`);
+			`--ytdl-format=best[height<=${opts.maxheight}]/bestvideo[height<=?${opts.maxheight}]+bestaudio/best`);
 		}
 		const query = (`?play_url=` + encodeURIComponent(url) + [''].concat(
 			opts.mpv_args.map(encodeURIComponent)).join('&mpv_args='));
@@ -58,8 +58,14 @@ chrome.contextMenus.onClicked.addListener(function(info, tab) {
 	// console.log("item " + info.menuItemId + " was clicked");
 	// console.log("info: " + JSON.stringify(info));
 	// console.log("tab: " + JSON.stringify(tab));
-
-	playUrl(info["linkUrl"] || info["srcUrl"]|| info["pageUrl"], true);
+	
+	let url = info["linkUrl"] || info["srcUrl"]|| info["pageUrl"];
+	
+	if (url !== undefined && url !== null) {
+            playUrl(url.replace("blob:", ""), true);
+	} else {
+	    console.error("[play-with-mpv]: Failed to retrieve url from ifo", info);
+	}
 });
 
 chrome.commands.onCommand.addListener(function(command) {
